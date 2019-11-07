@@ -17,7 +17,8 @@ void CScene::ParseOBJ(const std::string& fileName)
 	if (file.is_open()) {
 		std::cout << "Parsing OBJFile : " << fileName << std::endl;
 
-		std::shared_ptr<IShader> pShader = std::make_shared<CShaderEyelight>(RGB(1, 0.5f, 0));
+		// std::shared_ptr<IShader> pShader = std::make_shared<CShaderEyelight>(RGB(1, 0.5f, 0));
+		std::shared_ptr<IShader> pShader = std::make_shared<CShaderEyelightTextured>(RGB(0.5f, 0.5f, 0.5f), "../data/barney.bmp");
 		std::vector<Vec3f> vVertexes;
 		std::vector<Vec2f> tempuvs;
 		std::vector<Vec3f> temp_normal;
@@ -52,7 +53,8 @@ void CScene::ParseOBJ(const std::string& fileName)
 				} 
 				// std::cout << "Face: " << f << std::endl;
 				//Add(std::make_shared<CPrimTriangle>(vVertexes[f0.val[0] - 1], vVertexes[f0.val[1] - 1], vVertexes[f0.val[2] - 1], pShader));
-				Add(std::make_shared<CPrimTriangleSmooth>(vVertexes[f0.val[0]-1],vVertexes[f0.val[1]-1],vVertexes[f0.val[2]- 1],temp_normal[f2.val[0]-1],temp_normal[f2.val[1]-1],temp_normal[f2.val[2]-1], pShader));
+				//Add(std::make_shared<CPrimTriangleSmooth>(vVertexes[f0.val[0]-1],vVertexes[f0.val[1]-1],vVertexes[f0.val[2]- 1],temp_normal[f2.val[0]-1],temp_normal[f2.val[1]-1],temp_normal[f2.val[2]-1], pShader));
+				Add(std::make_shared<CPrimTriangleSmoothTextured>(vVertexes[f0.val[0]-1],vVertexes[f0.val[1]-1],vVertexes[f0.val[2]- 1],temp_normal[f2.val[0]-1],temp_normal[f2.val[1]-1],temp_normal[f2.val[2]-1], tempuvs[f1.val[0] - 1], tempuvs[f1.val[1]-1], tempuvs[f1.val[2]-1], pShader));
 			}
 			else {
 				std::cout << "Unknown key [" << line << "] met in the OBJ file" << std::endl;
