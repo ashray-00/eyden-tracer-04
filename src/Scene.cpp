@@ -31,7 +31,7 @@ void CScene::ParseOBJ(const std::string& fileName)
 				Vec3f v;
 				for (int i = 0; i < 3; i++) ss >> v.val[i];
 				// std::cout << "Vertex: " << v << std::endl;
-				vVertexes.emplace_back(100 * v);
+				vVertexes.emplace_back(v);
 			}
 			else if (line == "vt"){
 				Vec2f vt;
@@ -41,7 +41,7 @@ void CScene::ParseOBJ(const std::string& fileName)
 			else if (line == "vn"){
 				Vec3f vn;
 				for (int i = 0; i < 2; i++) ss >> vn.val[i];
-				temp_normal.emplace_back(100 * vn);
+				temp_normal.emplace_back(vn);
 			} 
 			else if (line == "f") {
 				Vec3i f0,f1,f2;

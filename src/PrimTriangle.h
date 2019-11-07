@@ -54,18 +54,16 @@ public:
 		if (ray.t <= f || f <  Epsilon  ) return false;
 		
 		// --- PUT YOUR CODE HERE ---
-		// float denom = this->getNormal(ray).dot(this->getNormal(ray));
-		// if (fabs(getNormal(ray).dot(ray.dir)) < Epsilon) return false;
-		// Vec3f P = ray.org + f * ray.dir;
-		// Vec3f C = edge1.cross(P - m_a);
-		// if (this->getNormal(ray).dot(C) < 0) return false;
-		// C = (m_c - m_b).cross(P - m_b);
-		// if ((ray.u = (this->getNormal(ray).dot(C))) < 0) return false;
-		// C = (m_a - m_c).cross(P - m_c);
-		// if ((ray.v = (this->getNormal(ray).dot(C))) < 0) return false;
+		Vec3f p = ray.org + f * ray.dir;
+		float area = norm(edge1.cross(edge2));
 
-		ray.u = lambda;
-		ray.v = mue;
+		Vec3f Vec_AP = p - m_a;
+		float area_U = norm(Vec_AP.cross(edge1));
+		ray.u = area_U / area;
+
+		float area_V = norm(Vec_AP.cross(edge2));
+		ray.v = area_V / area;
+		
 		ray.t = f;
 		ray.hit = this;
 		return true;
