@@ -32,7 +32,7 @@ public:
 		// assume u/v coordinates in ray correspond to beta(u) and gamma(v) barycentric coordinates of 
 		// hitpoint on triangle (have to be stored like this in the intersection code!)
 		// --- PUT YOUR CODE HERE ---
-		Vec3f normal =  Vec2f uv =  (1 - ray.u - ray.v) * m_ta   + ray.u * m_tb +  ray.v * m_tc;
+		Vec3f normal =  (1 - ray.u - ray.v) * m_na   + ray.u * m_nb +  ray.v * m_nc;
 		normal = normalize(normal); 
 		return normal;
 	}
